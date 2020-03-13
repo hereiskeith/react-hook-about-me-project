@@ -1,34 +1,26 @@
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import {theme, ThemeContext} from "../theme-context";
 
-class DigitalClock extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: new Date()
-        }
+const DigitalClock = props => {
+  const [time, setTime] = useState(new Date());
+  const theme = useContext(ThemeContext);
+  useEffect(() => {
+    let UpdateTimeEach1s = setInterval(() => {
+      setTime(new Date())
+    }, 1000);
+    return () => {
+      clearInterval(UpdateTimeEach1s)
     }
-    componentDidMount() {
-        this.timer = setInterval(() => {
-            this.setState({
-                date: new Date()
-        });
-            },1000);
-    }
-    componentDidUpdate(prevProps, prevState) {
-        console.log(prevState)
-    }
+  }, [time]);
 
-    componentWillUnmount() {
-        clearInterval(this.timer)
-    }
-
-    render() {
-        return (
-        <div className="digital-clock-component jumbotron">
-            <h4>{this.state.date.toLocaleTimeString()}</h4>
-        </div>
-        )
-    }
-}
+  return (
+    <div className="d-flex flex-column justify-content-center align-items-center digital-clock-component col-md-3 mb-3">
+      <h4>{time.toLocaleTimeString()}</h4>
+      <div style={{width: 'fit-content'}}>
+        {theme.quote}
+      </div>
+    </div>
+  )
+};
 
 export default DigitalClock
