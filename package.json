@@ -13,7 +13,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.0",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^3.4.4",
     "react-swipeable-views": "^0.13.9"
   },
   "scripts": {
